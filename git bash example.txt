@@ -1,0 +1,55 @@
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology
+$ cd UGRF/
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF
+$ ls
+env/  parkinson-ai-project/
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF
+$ mkdir remove
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF
+$ cd remove/
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove
+$ git init
+Initialized empty Git repository in C:/Users/hamod/OneDrive - Arab Academy for Science and Technology/UGRF/remove/.git/
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (master)
+$ git remote add origin https://github.com/MohamedBahaa2/FIPF.git
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (master)
+$ git branch -m main
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$ git pull origin main
+remote: Enumerating objects: 64, done.
+remote: Counting objects: 100% (64/64), done.
+remote: Compressing objects: 100% (48/48), done.
+remote: Total 64 (delta 18), reused 48 (delta 13), pack-reused 0 (from 0)
+Unpacking objects: 100% (64/64), 13.11 KiB | 67.00 KiB/s, done.
+From https://github.com/MohamedBahaa2/FIPF
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$ ls
+README.md  intersection_finder.py
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$ git add .
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$ git commit -m 'test'
+On branch main
+nothing to commit, working tree clean
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$ git push origin main
+Everything up-to-date
+
+Mohamed Bahaa@LOQ15 MINGW64 ~/OneDrive - Arab Academy for Science and Technology/UGRF/remove (main)
+$

@@ -1,0 +1,5 @@
+# Ignore environment folder
+env/
+
+# Ignore all MP4 videos
+*.mp4
