@@ -76,7 +76,7 @@ def predict_new_data(model_package, new_data):
 
     return predictions, probabilities
 
-def plot_confusion_matrix(y_true, y_pred, labels=['Control', 'Parkinson's'], title='Confusion Matrix'):
+def plot_confusion_matrix(y_true, y_pred, labels=['Control', "Parkinson's"], title='Confusion Matrix'):
     """
     Plot confusion matrix with annotations
 

@@ -123,11 +123,85 @@ class ParkinsonDetector:
         print(df.describe())
 
         # Save exploration results
-        df.describe().to_csv('parkinsons_gait_detection/results/data_statistics.csv')
+        df.describe().to_csv('results/data_statistics.csv')
 
         return df
 
+
     def preprocess_data(self, df):
+        """
+        Preprocess the data: handling missing values, scaling, feature selection, train-test split
+        """
+        print("\n" + "="*60)
+        print("DATA PREPROCESSING")
+        print("="*60)
+        
+        # Handle missing values FIRST
+        print("Handling missing values...")
+        
+        # Fill disease_duration_years for control group (they don't have PD)
+        if 'disease_duration_years' in df.columns:
+            df.loc[df['label'] == 0, 'disease_duration_years'] = 0
+            print("Filled disease_duration_years for control group")
+        
+        # Check for any remaining missing values
+        missing_counts = df.isnull().sum()
+        if missing_counts.sum() > 0:
+            print("Remaining missing values:")
+            print(missing_counts[missing_counts > 0])
+            
+            # Remove columns with too many missing values (>50%)
+            threshold = len(df) * 0.5
+            cols_to_drop = missing_counts[missing_counts > threshold].index
+            if len(cols_to_drop) > 0:
+                df = df.drop(cols_to_drop, axis=1)
+                print(f"Dropped columns with >50% missing: {list(cols_to_drop)}")
+            
+            # Use median imputation for remaining missing values
+            from sklearn.impute import SimpleImputer
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            non_label_cols = [col for col in numeric_cols if col != 'label']
+            
+            if len(non_label_cols) > 0:
+                imputer = SimpleImputer(strategy='median')
+                df[non_label_cols] = imputer.fit_transform(df[non_label_cols])
+                print(" Applied median imputation to remaining missing values")
+        
+        # Separate features (X) and target (y)
+        X = df.drop('label', axis=1).select_dtypes(include=[np.number])
+        y = df['label']
+
+            # Split data
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y,
+            test_size=self.config['test_size'],
+            random_state=self.config['random_state'],
+            stratify=y
+        )
+        
+        # Scale features if configured
+        if self.config['scale_features']:
+            self.scaler = StandardScaler()
+            X_train = self.scaler.fit_transform(X_train)
+            X_test = self.scaler.transform(X_test)
+            print("Features scaled using StandardScaler")
+        
+        # Feature selection if configured
+        if self.config['feature_selection'] and self.config['n_features'] < X.shape[1]:
+            self.feature_selector = SelectKBest(score_func=f_classif, k=self.config['n_features'])
+            X_train = self.feature_selector.fit_transform(X_train, y_train)
+            X_test = self.feature_selector.transform(X_test)
+            self.selected_features = X.columns[self.feature_selector.get_support()]
+            print(f"Selected {len(self.selected_features)} features: {list(self.selected_features)}")
+        else:
+            self.selected_features = X.columns
+        
+        # ✅ Return final training and test sets
+        return X_train, X_test, y_train, y_test
+    
+
+
+    '''def preprocess_data(self, df):
         """
         Preprocess the data: scaling, feature selection, train-test split
 
@@ -187,7 +261,7 @@ class ParkinsonDetector:
             X_test_selected = X_test_scaled
             self.selected_features = X.columns
 
-        return X_train_selected, X_test_selected, y_train, y_test
+        return X_train_selected, X_test_selected, y_train, y_test'''
 
     def train_models(self, X_train, X_test, y_train, y_test):
         """
@@ -323,7 +397,7 @@ class ParkinsonDetector:
                 print(f"{row['feature']:<25}: {row['importance']:.3f}")
 
             # Save feature importance
-            feature_df.to_csv('parkinsons_gait_detection/results/feature_importance.csv', index=False)
+            feature_df.to_csv('results/feature_importance.csv', index=False)
 
     def save_model(self, filepath=None):
         """Save the best model and preprocessing components"""
@@ -333,7 +407,7 @@ class ParkinsonDetector:
             return
 
         if filepath is None:
-            filepath = f'parkinsons_gait_detection/results/best_model_{best_name.lower().replace(" ", "_")}.joblib'
+            filepath = f'results/best_model_{best_name.lower().replace(" ", "_")}.joblib'
 
         # Save model and preprocessing components
         model_package = {

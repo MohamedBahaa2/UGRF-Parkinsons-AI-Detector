@@ -20,13 +20,13 @@ def test_imports():
     try:
         import pandas as pd
         import numpy as np
-        import sklearn
-        from parkinsons_detector import ParkinsonDetector
-        from utils import load_model, validate_data_format
-        print("✓ All imports successful")
+        #import sklearn
+        from code.parkinsons_detector import ParkinsonDetector
+        from code.utils import load_model, validate_data_format
+        print("All imports successful")
         return True
     except ImportError as e:
-        print(f"✗ Import error: {e}")
+        print(f"Import error: {e}")
         print("Please run: pip install -r requirements.txt")
         return False
 
@@ -40,23 +40,23 @@ def test_data_loading():
         patients_path = "data/patients_selected_variables.csv"
 
         if not os.path.exists(control_path):
-            print(f"✗ Control data file not found: {control_path}")
+            print(f"Control data file not found: {control_path}")
             return False
 
         if not os.path.exists(patients_path):
-            print(f"✗ Patients data file not found: {patients_path}")
+            print(f"Patients data file not found: {patients_path}")
             return False
 
         control_data = pd.read_csv(control_path)
         patients_data = pd.read_csv(patients_path)
 
-        print(f"✓ Control group loaded: {control_data.shape}")
-        print(f"✓ Patients group loaded: {patients_data.shape}")
+        print(f"Control group loaded: {control_data.shape}")
+        print(f"Patients group loaded: {patients_data.shape}")
 
         return True
 
     except Exception as e:
-        print(f"✗ Data loading error: {e}")
+        print(f"Data loading error: {e}")
         return False
 
 def test_pipeline():
@@ -64,15 +64,18 @@ def test_pipeline():
     print("\nTesting ML pipeline...")
 
     try:
-        from parkinsons_detector import ParkinsonDetector
+        from code.parkinsons_detector import ParkinsonDetector
 
         # Initialize detector
         config = {
-            'test_size': 0.3,      # Use more data for testing
-            'cv_folds': 3,         # Faster testing
-            'n_features': 8,       # Fewer features for speed
-            'random_state': 42
+            'test_size': 0.3,
+            'cv_folds': 3,
+            'n_features': 8,
+            'random_state': 42,
+            'scale_features': True,        # existing fix
+            'feature_selection': True      # Add this line
         }
+        
 
         detector = ParkinsonDetector(config=config)
 
@@ -83,14 +86,14 @@ def test_pipeline():
         df = detector.load_and_prepare_data(control_path, patients_path)
 
         if df is None:
-            print("✗ Failed to load and prepare data")
+            print("Failed to load and prepare data")
             return False
 
-        print(f"✓ Data prepared: {df.shape}")
+        print(f"Data prepared: {df.shape}")
 
         # Test preprocessing
         X_train, X_test, y_train, y_test = detector.preprocess_data(df)
-        print(f"✓ Data preprocessed: Train {X_train.shape}, Test {X_test.shape}")
+        print(f"Data preprocessed: Train {X_train.shape}, Test {X_test.shape}")
 
         # Test model training (just Random Forest for speed)
         from sklearn.ensemble import RandomForestClassifier
@@ -101,17 +104,17 @@ def test_pipeline():
         y_pred = rf_model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
 
-        print(f"✓ Model trained and tested: Accuracy = {accuracy:.3f}")
+        print(f"Model trained and tested: Accuracy = {accuracy:.3f}")
 
         if accuracy > 0.6:  # Reasonable threshold for test data
-            print("✓ Pipeline test successful")
+            print("Pipeline test successful")
             return True
         else:
-            print(f"⚠ Low accuracy ({accuracy:.3f}), but pipeline is functional")
+            print(f"Low accuracy ({accuracy:.3f}), but pipeline is functional")
             return True
 
     except Exception as e:
-        print(f"✗ Pipeline test failed: {e}")
+        print(f"Pipeline test failed: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -121,7 +124,7 @@ def test_utilities():
     print("\nTesting utility functions...")
 
     try:
-        from utils import validate_data_format, create_feature_documentation
+        from code.utils import validate_data_format, create_feature_documentation
         import pandas as pd
 
         # Test data validation
@@ -132,16 +135,16 @@ def test_utilities():
         })
 
         validation_result = validate_data_format(test_data)
-        print(f"✓ Data validation: {validation_result['valid']}")
+        print(f"Data validation: {validation_result['valid']}")
 
         # Test feature documentation
         docs = create_feature_documentation()
-        print(f"✓ Feature documentation: {len(docs)} categories")
+        print(f"Feature documentation: {len(docs)} categories")
 
         return True
 
     except Exception as e:
-        print(f"✗ Utility test failed: {e}")
+        print(f"Utility test failed: {e}")
         return False
 
 def main():
@@ -179,13 +182,13 @@ def main():
     print(f"\nTests passed: {passed}/{len(tests)}")
 
     if passed == len(tests):
-        print("\n🎉 All tests passed! The pipeline is ready to use.")
+        print("\nAll tests passed! The pipeline is ready to use.")
         print("\nNext steps:")
         print("1. Replace sample data with your actual CSV files")
         print("2. Run: python code/parkinsons_detector.py")
         print("3. Check results in the 'results/' folder")
     else:
-        print(f"\n⚠ {len(tests) - passed} test(s) failed. Please check the errors above.")
+        print(f"\n {len(tests) - passed} test(s) failed. Please check the errors above.")
         print("\nTroubleshooting:")
         print("1. Ensure all packages are installed: pip install -r requirements.txt")
         print("2. Check that data files exist in the 'data/' folder")
