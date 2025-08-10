@@ -1,0 +1,42 @@
+Feature,Description,Clinical_Significance
+subject_id,Unique subject identifier,Subject identification
+age,Age in years,Age-related gait changes
+gender,Gender (M/F),Gender differences in gait
+height_cm,Height in centimeters,Body size normalization
+weight_kg,Weight in kilograms,Body mass normalization
+stride_length_left_m,Stride length left foot (meters),Reduced in PD (bradykinesia)
+stride_length_right_m,Stride length right foot (meters),Reduced in PD (bradykinesia)
+step_length_left_m,Step length left foot (meters),Shorter steps in PD
+step_length_right_m,Step length right foot (meters),Shorter steps in PD
+gait_speed_ms,Average gait speed (m/s),Significantly reduced in PD
+cadence_steps_min,Cadence (steps per minute),Lower in PD patients
+step_width_m,Step width (meters),Increased in PD (balance compensation)
+stride_time_s,Stride time (seconds),Increased in PD
+step_time_s,Step time (seconds),Increased in PD
+swing_time_left_s,Swing time left foot (seconds),Reduced in PD
+swing_time_right_s,Swing time right foot (seconds),Reduced in PD
+stance_time_left_s,Stance time left foot (seconds),Increased in PD
+stance_time_right_s,Stance time right foot (seconds),Increased in PD
+double_support_time_s,Double support time (seconds),Increased in PD (balance strategy)
+single_support_left_s,Single support time left (seconds),Reduced in PD
+single_support_right_s,Single support time right (seconds),Reduced in PD
+stride_length_cv,Stride length coefficient of variation,Much higher in PD (motor control deficit)
+stride_time_cv,Stride time coefficient of variation,Much higher in PD (timing variability)
+step_length_cv,Step length coefficient of variation,Higher in PD (step inconsistency)
+step_time_cv,Step time coefficient of variation,Higher in PD (temporal irregularity)
+swing_time_cv,Swing time coefficient of variation,Higher in PD (swing phase variability)
+stance_time_cv,Stance time coefficient of variation,Higher in PD (stance phase variability)
+gait_speed_cv,Gait speed coefficient of variation,Much higher in PD (overall inconsistency)
+stride_length_asymmetry,Stride length asymmetry index,Higher in PD (left-right differences)
+step_length_asymmetry,Step length asymmetry index,Higher in PD (step asymmetry)
+swing_time_asymmetry,Swing time asymmetry index,Higher in PD (temporal asymmetry)
+stance_time_asymmetry,Stance time asymmetry index,Higher in PD (stance asymmetry)
+arm_swing_left_deg,Left arm swing amplitude (degrees),Markedly reduced in PD (rigidity)
+arm_swing_right_deg,Right arm swing amplitude (degrees),Markedly reduced in PD (rigidity)
+hip_flexion_max_deg,Maximum hip flexion angle (degrees),Slightly reduced in PD
+knee_flexion_max_deg,Maximum knee flexion angle (degrees),Reduced in PD (joint stiffness)
+ankle_dorsiflexion_deg,Maximum ankle dorsiflexion (degrees),Reduced in PD (ankle rigidity)
+heel_contact_force_N,Heel contact force (Newtons),Reduced in PD (weaker push-off)
+push_off_force_N,Push-off force (Newtons),Reduced in PD (weaker push-off)
+loading_response_time_s,Loading response duration (seconds),Prolonged in PD
+pre_swing_duration_s,Pre-swing phase duration (seconds),Prolonged in PD
