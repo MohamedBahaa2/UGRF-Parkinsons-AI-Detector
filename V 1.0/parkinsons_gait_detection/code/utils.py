@@ -8,8 +8,8 @@ This module contains helper functions for data processing, evaluation, and visua
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix, roc_curve, auc
+import seaborn as sns # type: ignore
+from sklearn.metrics import confusion_matrix, roc_curve, auc # type: ignore
 import joblib
 from pathlib import Path
 

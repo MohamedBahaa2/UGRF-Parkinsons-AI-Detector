@@ -96,8 +96,8 @@ def test_pipeline():
         print(f"Data preprocessed: Train {X_train.shape}, Test {X_test.shape}")
 
         # Test model training (just Random Forest for speed)
-        from sklearn.ensemble import RandomForestClassifier
-        from sklearn.metrics import accuracy_score
+        from sklearn.ensemble import RandomForestClassifier # type: ignore
+        from sklearn.metrics import accuracy_score # type: ignore
 
         rf_model = RandomForestClassifier(n_estimators=10, random_state=42)  # Fast training
         rf_model.fit(X_train, y_train)

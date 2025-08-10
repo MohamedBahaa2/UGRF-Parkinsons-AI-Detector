@@ -13,22 +13,22 @@ Date: August 2025
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as sns # type: ignore
 from pathlib import Path
 import joblib
 import warnings
 warnings.filterwarnings('ignore')
 
 # Machine Learning imports
-from sklearn.model_selection import (train_test_split, cross_val_score, 
-                                   GridSearchCV, StratifiedKFold)
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectKBest, f_classif, RFE
-from sklearn.ensemble import RandomForestClassifier, VotingClassifier
-from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import (accuracy_score, classification_report, 
+from sklearn.model_selection import (train_test_split, cross_val_score,  # type: ignore
+                                   GridSearchCV, StratifiedKFold)  # type: ignore
+from sklearn.preprocessing import StandardScaler    # type: ignore
+from sklearn.feature_selection import SelectKBest, f_classif, RFE  # type: ignore
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier  # type: ignore
+from sklearn.svm import SVC # type: ignore
+from sklearn.linear_model import LogisticRegression # type: ignore
+from sklearn.neighbors import KNeighborsClassifier # type: ignore
+from sklearn.metrics import (accuracy_score, classification_report,  # type: ignore
                            confusion_matrix, roc_auc_score, roc_curve)
 
 class ParkinsonDetector:
@@ -158,7 +158,7 @@ class ParkinsonDetector:
                 print(f"Dropped columns with >50% missing: {list(cols_to_drop)}")
             
             # Use median imputation for remaining missing values
-            from sklearn.impute import SimpleImputer
+            from sklearn.impute import SimpleImputer # type: ignore
             numeric_cols = df.select_dtypes(include=[np.number]).columns
             non_label_cols = [col for col in numeric_cols if col != 'label']
             
