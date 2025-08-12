@@ -1,11 +1,11 @@
-feature                , importance
-stride_time_cv         , 0.2602771903813154
-step_time_cv           , 0.23538618168448985
-step_length_cv         , 0.10937514127753699
-stride_length_cv       , 0.10049020505131998
-swing_time_cv          , 0.09108560665535802
-stance_time_cv         , 0.07859703732143154
-gait_speed_cv          , 0.06622956940668966
-stride_length_asymmetry, 0.036094377251053966
-stride_length_left_m   , 0.011670049440904313
-double_support_time_s  , 0.010794641529900333
+feature,importance
+stride_time_cv,0.2602771903813154
+step_time_cv,0.23538618168448985
+step_length_cv,0.10937514127753699
+stride_length_cv,0.10049020505131998
+swing_time_cv,0.09108560665535802
+stance_time_cv,0.07859703732143154
+gait_speed_cv,0.06622956940668966
+stride_length_asymmetry,0.036094377251053966
+stride_length_left_m,0.011670049440904313
+double_support_time_s,0.010794641529900333
